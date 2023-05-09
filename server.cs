@@ -1,7 +1,7 @@
 if($RTB::Hooks::ServerControl)
 { 
 	RTB_registerPref("Enabled",	"CRC Checker","$Pref::Server::CRCUpdater::Enabled",	"bool","Server_CRCUpdater","1","0","0","CRC_Enable");
-	RTB_registerPref("Enabled",	"Notify server","$Pref::Server::CRCUpdater::NotifyServer",	"bool","Server_CRCUpdater","0","0","0","CRC_Notify");
+	RTB_registerPref("Notify server",	"CRC Checker","$Pref::Server::CRCUpdater::NotifyServer",	"bool","Server_CRCUpdater","0","0","0","CRC_Notify");
 	RTB_registerPref("Folder Name/Path",	"CRC Checker","$Pref::Server::CRCUpdater::FolderName", "string 999","Server_CRCUpdater","weapon_gun","0","0","CRC_Path");
 	RTB_registerPref("Schedule Tick (seconds)",	"CRC Checker","$Pref::Server::CRCUpdater::SchedTime", "int 1 60","Server_CRCUpdater","5","0","0","CRC_TimeUpdate");	
 }
