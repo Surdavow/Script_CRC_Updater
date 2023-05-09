@@ -1,6 +1,6 @@
 Recommended to use RTB or BLG for easy preferences
 
-Choose a folder, or its specific folder path to check for files you can update! Just make sure the folder is unzipped
+Choose a folder, or its specific folder path to check for files you can update! Just make sure the folder is unzipped, the script only checks the path of a folder in the add-ons folder at the moment
 
 Example: 	a folder name would be gamemode_left4block
 		a specific folder would be gamemode_left4block/modules/scripts
