@@ -6,10 +6,10 @@ if($RTB::Hooks::ServerControl)
 }
 else 
 {
-	$Pref::Server::CRCUpdater::Enabled = true;
-	$Pref::Server::CRCUpdater::FolderName = "weapon_gun";	
-	$Pref::Server::CRCUpdater::Path = "add-ons/weapon_gun/*.cs";
-	$Pref::Server::CRCUpdater::SchedTime = 5;	
+	if($Pref::Server::CRCUpdater::Enabled $= "") $Pref::Server::CRCUpdater::Enabled = true;
+	if($Pref::Server::CRCUpdater::FolderName $= "") $Pref::Server::CRCUpdater::FolderName = "weapon_gun";	
+	if($Pref::Server::CRCUpdater::Path $= "") $Pref::Server::CRCUpdater::Path = "add-ons/weapon_gun/*.cs";
+	if($Pref::Server::CRCUpdater::SchedTime $= "") $Pref::Server::CRCUpdater::SchedTime = 5;	
 }
 
 function CRC_TimeUpdate(%oldVal,%newVal)
