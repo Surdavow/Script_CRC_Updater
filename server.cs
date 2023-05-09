@@ -1,12 +1,14 @@
 if($RTB::Hooks::ServerControl)
 { 
 	RTB_registerPref("Enabled",	"CRC Checker","$Pref::Server::CRCUpdater::Enabled",	"bool","Server_CRCUpdater","1","0","0","CRC_Enable");
+	RTB_registerPref("Enabled",	"Notify server","$Pref::Server::CRCUpdater::NotifyServer",	"bool","Server_CRCUpdater","0","0","0","CRC_Notify");
 	RTB_registerPref("Folder Name/Path",	"CRC Checker","$Pref::Server::CRCUpdater::FolderName", "string 999","Server_CRCUpdater","weapon_gun","0","0","CRC_Path");
-	RTB_registerPref("Schedule Tick (seconds)",	"CRC Checker","$Pref::Server::CRCUpdater::SchedTime", "int 1 60","Server_CRCUpdater","5","0","0","CRC_TimeUpdate");		
+	RTB_registerPref("Schedule Tick (seconds)",	"CRC Checker","$Pref::Server::CRCUpdater::SchedTime", "int 1 60","Server_CRCUpdater","5","0","0","CRC_TimeUpdate");	
 }
 else 
 {
 	if($Pref::Server::CRCUpdater::Enabled $= "") $Pref::Server::CRCUpdater::Enabled = true;
+	if($Pref::Server::CRCUpdater::NotifyServer $= "") $Pref::Server::CRCUpdater::NotifyServer = false;
 	if($Pref::Server::CRCUpdater::FolderName $= "") $Pref::Server::CRCUpdater::FolderName = "weapon_gun";	
 	if($Pref::Server::CRCUpdater::Path $= "") $Pref::Server::CRCUpdater::Path = "add-ons/weapon_gun/*.cs";
 	if($Pref::Server::CRCUpdater::SchedTime $= "") $Pref::Server::CRCUpdater::SchedTime = 5;	
@@ -61,7 +63,8 @@ function CRC_Check()
 		if($LastTimeChecked[%b] !$= %currentTimeChecked[%b])
 		{
 			$LastTimeChecked[%b] = %currentTimeChecked[%b];
-			echo("File changed, executing" SPC %scriptfile);
+			
+			if($Pref::Server::CRCUpdater::NotifyServer) talk("File changed, executing" SPC %scriptfile);
 			exec(%scriptfile);
 			%fileschanged = true;
 		}
