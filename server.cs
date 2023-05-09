@@ -68,7 +68,7 @@ function CRC_Check()
 	}
 
 	cancel($CRCUpdaterSched);
-	$CRCUpdaterSched = scheduleNoQuota($Pref::Server::CRCUpdater::SchedTime*1000,0,CRC_Check);
+	$CRCUpdaterSched = schedule($Pref::Server::CRCUpdater::SchedTime*1000,0,CRC_Check);
 }
 
 CRC_Update();

@@ -1,8 +1,18 @@
 Recommended to use RTB or BLG for easy preferences
 
-Choose a folder, or its specific folder path to check for files you can update! Just make sure the folder is unzipped, the script only checks the path of a folder in the add-ons folder at the moment
+Choose a folder, or its specific folder path to check for files you can update! 
+Just make sure the folder is unzipped, the script only checks the path of a folder in the add-ons folder at the moment
+
+Prefs:
+
+Enabled - Toggle it on or off
+
+Folder Name/Path - Specify what folder or path the function will check for changes in a script, or scripts, view the example
 
 Example: 	a folder name would be gamemode_left4block
 		a specific folder would be gamemode_left4block/modules/scripts
+
+Schedule Tick - How long it takes before the function checks again in seconds, 5 is best, but less than that is not
+recommended if you have lots of files to check
 
 By Surdavow#4992 on Discord
