@@ -60,7 +60,7 @@ function CRC_Check()
 		
 		if($LastTimeChecked[%b] !$= %currentTimeChecked[%b])
 		{
-			$LastTimeChecked[%b] = getFileCRC(%scriptfile);
+			$LastTimeChecked[%b] = %currentTimeChecked[%b];
 			echo("File changed, executing" SPC %scriptfile);
 			exec(%scriptfile);
 			%fileschanged = true;
