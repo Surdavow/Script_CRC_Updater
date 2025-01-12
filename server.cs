@@ -56,7 +56,7 @@ function CRC_Update(%path)
     $CRC::FileList = "";
     $CRC::FileCount = 0;
 
-    $Pref::Server::CRCUpdater::Path = %path;
+    if(%path !$= "") $Pref::Server::CRCUpdater::Path = %path;
     
     for(%CRCFile = findFirstFile($Pref::Server::CRCUpdater::Path); %CRCFile !$= ""; %CRCFile = findNextFile($Pref::Server::CRCUpdater::Path))
     {
@@ -80,7 +80,7 @@ function CRC_Check()
     }
 
     cancel($CRCUpdaterSched);
-    $CRCUpdaterSched = scheduleNoQuota(5000, 0, "CRC_Check");
+    $CRCUpdaterSched = scheduleNoQuota(2500, 0, "CRC_Check");
 }
 
 CRC_Update();
