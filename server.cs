@@ -51,10 +51,12 @@ function CRC_logChange(%command)
     }
 }
 
-function CRC_Update()
+function CRC_Update(%path)
 {
     $CRC::FileList = "";
     $CRC::FileCount = 0;
+
+    $Pref::Server::CRCUpdater::Path = %path;
     
     for(%CRCFile = findFirstFile($Pref::Server::CRCUpdater::Path); %CRCFile !$= ""; %CRCFile = findNextFile($Pref::Server::CRCUpdater::Path))
     {
