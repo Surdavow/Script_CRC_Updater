@@ -6,41 +6,49 @@ function CRC_logChange(%command)
 {
     %lineShowCount = 0;
     
-    // No need to check directory - TorqueScript will create it if needed
     if(!isObject(CRCFileObject))
+    {
         new FileObject(CRCFileObject);
+    }
         
     if(!isObject(CRCConsoleLogger))
+    {
         new ConsoleLogger(CRCConsoleLogger, "config/crcLog.out");
+    }
     
-    CRCFileObject.openForWrite("config/crcLog.out");
-    CRCFileObject.close();
+    // Try to create an empty file first
+    if(CRCFileObject.openForWrite("config/crcLog.out"))
+    {
+        CRCFileObject.close();
+    }
     
     CRCConsoleLogger.attach();
-    eval(%command); // Execute once
+    eval(%command);
     CRCConsoleLogger.detach();
     
     // Store last line to check for duplicates
     %lastLine = "";
     
-    CRCFileObject.openForRead("config/crcLog.out");
-    while(!CRCFileObject.isEOF())
+    if(CRCFileObject.openForRead("config/crcLog.out") || CRCFileObject.openForRead("crcLog.out"))
     {
-        %line = CRCFileObject.readLine();
-        if(trim(%line) $= "" || 
-           getSubStr(%line, 0, 11) $= "BackTrace:" || 
-           getSubStr(%line, 0, 9) $= "ResManager" ||
-           %line $= %lastLine) // Skip if identical to last line
-            continue;
-            
-        if(%lineShowCount < 500)
+        while(!CRCFileObject.isEOF())
         {
-            messageAll('', '<color:999999><font:consolas:18>CONSOLE: %1', strReplace(%line, "\t", "^"));
-            %lineShowCount++;
+            %line = CRCFileObject.readLine();
+            if(trim(%line) $= "" || 
+               getSubStr(%line, 0, 11) $= "BackTrace:" || 
+               getSubStr(%line, 0, 9) $= "ResManager" ||
+               %line $= %lastLine)
+                continue;
+                
+            if(%lineShowCount < 500)
+            {
+                messageAll('', '<color:999999><font:consolas:18>CONSOLE: %1', strReplace(%line, "\t", "^"));
+                %lineShowCount++;
+            }
+            %lastLine = %line;
         }
-        %lastLine = %line;
+        CRCFileObject.close();
     }
-    CRCFileObject.close();
 }
 
 function CRC_Update()
