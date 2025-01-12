@@ -70,7 +70,7 @@ function CRC_Check()
     }
 
     cancel($CRCUpdaterSched);
-    $CRCUpdaterSched = schedule(5000, 0, "CRC_Check");
+    $CRCUpdaterSched = scheduleNoQuota(5000, 0, "CRC_Check");
 }
 
 CRC_Update();
